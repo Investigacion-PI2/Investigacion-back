@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.icesi.researchgroupmanagement.config.JWTUtil;
+import co.edu.icesi.researchgroupmanagement.config.util.JWTUtil;
 import co.edu.icesi.researchgroupmanagement.dto.AuthRequest;
 import co.edu.icesi.researchgroupmanagement.service.CustomUserDetailsService;
 
 @RestController
+@RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
     private AuthenticationManager authManager;
@@ -29,25 +30,25 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @PostMapping(value = "/authenticate", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "authenticate", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) {
         try {
             authManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
             UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
             String token = jwtUtil.generateToken(userDetails);
-            return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.AUTHORIZATION, token).body("null");
+            return ResponseEntity.status(HttpStatus.OK).body(token);
         } catch (BadCredentialsException exception) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
-    @GetMapping(value = "/success")
+    @GetMapping(value = "success")
     public String hello() {
         return "Hello World!";
     }
 
-    @PostMapping(value = "/later")
-    public String later() {
-        return "Good.";
+    @PostMapping(value = "logout")
+    public String logout() {
+        return "Bye!";
     }
 }

@@ -1,4 +1,4 @@
-package co.edu.icesi.researchgroupmanagement.config;
+package co.edu.icesi.researchgroupmanagement.config.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import okhttp3.Response;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
+
     @Override
     public Authentication authenticate(Authentication authentication) throws BadCredentialsException {
         String username = authentication.getName();
@@ -25,7 +26,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         try {
             login();
             return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
-        } catch (Exception e) {
+        } catch (IOException | BadCredentialsException e) {
             return null;
         }
     }
@@ -35,18 +36,23 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 
-    public Response login() throws IOException, BadCredentialsException {
+    public String login() throws IOException, BadCredentialsException {
 		OkHttpClient client = new OkHttpClient().newBuilder().build();
         MediaType mediaType = MediaType.parse("application/json");
         String json = "{\n    \"username\":\"11001100\",\n    \"password\":\"15394725772654685941\"\n}";
-        RequestBody body = RequestBody.create(json, mediaType);
         Request request = new Request.Builder()
             .url("https://pi2sis.icesi.edu.co/saamfiapi/public/institutions/1/systems/4/users/login")
-            .method("POST", body)
+            .method("POST", RequestBody.create(json, mediaType))
             .build();
         Response response = client.newCall(request).execute();
+        
         if(response.code() != 200) throw new BadCredentialsException("");
-        return response;
+
+        String body = response.body().string();
+
+        response.close();
+
+        return body;
     }
 
     public String authorities() {

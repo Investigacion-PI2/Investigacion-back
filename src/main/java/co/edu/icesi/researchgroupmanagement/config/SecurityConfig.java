@@ -9,11 +9,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import co.edu.icesi.researchgroupmanagement.config.util.CustomAccessDeniedHandler;
+import co.edu.icesi.researchgroupmanagement.config.util.CustomAuthenticationProvider;
+import co.edu.icesi.researchgroupmanagement.config.util.CustomPasswordEncoder;
 import co.edu.icesi.researchgroupmanagement.service.CustomUserDetailsService;
 
 @Configuration
@@ -29,29 +30,24 @@ public class SecurityConfig {
 
     @Autowired
     private CustomAuthenticationProvider authProvider;
+
+    @Autowired
+    CustomPasswordEncoder passwordEncoder;
     
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) 
+    public AuthenticationManager authManager(HttpSecurity http) 
       throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
-          .userDetailsService(userDetailsService)
-          .passwordEncoder(bCryptPasswordEncoder)
-          .and()
-          .build();
-    }
-
-    @Bean
-    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = 
-            http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(authProvider);
-        return authenticationManagerBuilder.build();
+            .userDetailsService(userDetailsService)
+            .passwordEncoder(passwordEncoder.getPasswordEncoder())
+            .and()
+            .authenticationProvider(authProvider)
+            .build();
     }
     
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JwtFilterRequest jwtFilterRequest) throws Exception {
-        http.csrf()
-            .disable()
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtFilter jwtFilter) throws Exception {
+        http.csrf().disable().cors().disable()
             .authorizeRequests((authz) -> authz
                 .antMatchers("/**/authenticate").permitAll()
                 .anyRequest().authenticated()
@@ -59,10 +55,11 @@ public class SecurityConfig {
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class)
+            .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+            .and()
             .httpBasic()
             .and()
-            .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }

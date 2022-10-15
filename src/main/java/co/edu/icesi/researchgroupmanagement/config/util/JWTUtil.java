@@ -1,4 +1,4 @@
-package co.edu.icesi.researchgroupmanagement.config;
+package co.edu.icesi.researchgroupmanagement.config.util;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JWTUtil {
-    public static final long JWT_TOKEN_VALIDITY = 60 * 60; // 12 * 30 * 24 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 10; // 12 * 30 * 24 * 60 * 60;
     
     @Value("${jwt.secret}")
     private String secret;
@@ -37,7 +37,7 @@ public class JWTUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact(); // HS512
+                .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
@@ -45,7 +45,7 @@ public class JWTUtil {
             return false;
 
         final String username = getUsernameFromToken(token);
-        return (userDetails != null && username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (userDetails!=null && username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private Claims getAllClaimsFromToken(String token) {

@@ -1,4 +1,4 @@
-package co.edu.icesi.researchgroupmanagement.config;
+package co.edu.icesi.researchgroupmanagement.config.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

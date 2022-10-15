@@ -21,7 +21,7 @@ public class ResearchGroupManagementApplication {
 	CommandLineRunner dummy(UserRepository userRepository, UserTypeRepository userTypeRepository) {
 		return (args) -> {
 			Long l = (long) 1;
-			userRepository.save(new User(l,"11001100","15394725772654685941",l));
+			userRepository.save(new User(l,"1101100","15394725772654685941",l));
 			userTypeRepository.save(new UserType(l,"ESTU"));
 
 		};
