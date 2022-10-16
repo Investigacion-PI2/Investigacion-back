@@ -1,4 +1,5 @@
-// default package
+package co.edu.icesi.researchgroupmanagement.model;
+
 // Generated Oct 15, 2022, 11:56:22 PM by Hibernate Tools 5.6.7.Final
 
 import java.util.HashSet;
