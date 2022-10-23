@@ -6,7 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import co.edu.icesi.researchgroupmanagement.domain.User;
+
+import co.edu.icesi.researchgroupmanagement.model.Users;
 import co.edu.icesi.researchgroupmanagement.repository.UserRepository;
 import co.edu.icesi.researchgroupmanagement.repository.UserTypeRepository;
 
@@ -20,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService  {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        Users user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
         return new CustomUserDetails(user, userTypeRepository);
     }
     

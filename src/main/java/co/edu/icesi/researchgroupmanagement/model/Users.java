@@ -1,5 +1,5 @@
 package co.edu.icesi.researchgroupmanagement.model;
-// Generated Oct 22, 2022, 7:23:43 PM by Hibernate Tools 5.6.7.Final
+// Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class Users implements java.io.Serializable {
 	private String email;
 	private byte[] userPicture;
 	private Set admissionRequests = new HashSet(0);
-	private Set rgroupLeaderses = new HashSet(0);
+	private Set researchGroups = new HashSet(0);
 	private Set rgroupUserses = new HashSet(0);
 	private Set studentPrograms = new HashSet(0);
 	private Set resources = new HashSet(0);
@@ -48,7 +48,7 @@ public class Users implements java.io.Serializable {
 	}
 
 	public Users(long id, UserTypes userTypes, String username, String firstName, String lastName, Date dob,
-			String password, String email, byte[] userPicture, Set admissionRequests, Set rgroupLeaderses,
+			String password, String email, byte[] userPicture, Set admissionRequests, Set researchGroups,
 			Set rgroupUserses, Set studentPrograms, Set resources, Set rprojectUserses) {
 		this.id = id;
 		this.userTypes = userTypes;
@@ -60,7 +60,7 @@ public class Users implements java.io.Serializable {
 		this.email = email;
 		this.userPicture = userPicture;
 		this.admissionRequests = admissionRequests;
-		this.rgroupLeaderses = rgroupLeaderses;
+		this.researchGroups = researchGroups;
 		this.rgroupUserses = rgroupUserses;
 		this.studentPrograms = studentPrograms;
 		this.resources = resources;
@@ -147,12 +147,12 @@ public class Users implements java.io.Serializable {
 		this.admissionRequests = admissionRequests;
 	}
 
-	public Set getRgroupLeaderses() {
-		return this.rgroupLeaderses;
+	public Set getResearchGroups() {
+		return this.researchGroups;
 	}
 
-	public void setRgroupLeaderses(Set rgroupLeaderses) {
-		this.rgroupLeaderses = rgroupLeaderses;
+	public void setResearchGroups(Set researchGroups) {
+		this.researchGroups = researchGroups;
 	}
 
 	public Set getRgroupUserses() {

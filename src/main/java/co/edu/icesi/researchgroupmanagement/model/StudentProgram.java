@@ -1,5 +1,5 @@
 package co.edu.icesi.researchgroupmanagement.model;
-// Generated Oct 22, 2022, 7:23:43 PM by Hibernate Tools 5.6.7.Final
+// Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
 import java.util.HashSet;
 import java.util.Set;

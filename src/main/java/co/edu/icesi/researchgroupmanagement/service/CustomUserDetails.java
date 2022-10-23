@@ -9,16 +9,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import co.edu.icesi.researchgroupmanagement.domain.User;
+import co.edu.icesi.researchgroupmanagement.model.Users;
 import co.edu.icesi.researchgroupmanagement.repository.UserTypeRepository;
 
 
 public class CustomUserDetails implements UserDetails {
 
-    private User user;
+    private Users user;
     private UserTypeRepository userTypeRepository;
 
-    public CustomUserDetails(User user, UserTypeRepository userTypeRepository) {
+    public CustomUserDetails(Users user, UserTypeRepository userTypeRepository) {
         this.user = user;
         this.userTypeRepository = userTypeRepository;
     }
@@ -27,7 +27,7 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         //roles.forEach(role -> authorities.add(new SimpleGrantedAuthority("TYPE_" + role.getName())));
-        authorities.add(new SimpleGrantedAuthority("TYPE_" + userTypeRepository.findById(user.getType())));
+        authorities.add(new SimpleGrantedAuthority("TYPE_" + userTypeRepository.findById(user.getUserTypes().getId())));
         return authorities;
     }
 

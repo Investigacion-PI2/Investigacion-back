@@ -36,18 +36,19 @@ public class ResearchGroupService {
             throw new IllegalArgumentException("El grupo de investigacion no puede ser nulo");
         } else if (rg.getName() == null) {
             throw new IllegalArgumentException("El nombre del grupo de investigacion no puede estar vacio");
-        } else if (rg.getColcienciasCategory() == null) {
+        } else if (rg.getMincienciasCategory() == null) {
             throw new IllegalArgumentException("La categoria no debe ser nula");
         } else if (rg.getDescription() == null) {
             throw new IllegalArgumentException("Descripcion no debe estar vacia");
-        } else if (rg.getCitizenId() == null) {
-            throw new IllegalArgumentException("Citizen id no debe ser nulo");
-        } else if (rg.getNationality() == null) {
-            throw new IllegalArgumentException("Nationality no debe ser nulo");
-        } else if (rg.getSecondLastName() == null) {
-            throw new IllegalArgumentException("Second lastname nulo");
-        } else if (rg.getCountryOfBirth() == null) {
-            throw new IllegalArgumentException("Pais de nacimiento nulo");
+            // Estas validaciones ahora son de la clase rgroupLeaders
+//        } else if (rg.getCitizenId() == null) {
+//            throw new IllegalArgumentException("Citizen id no debe ser nulo");
+//        } else if (rg.getNationality() == null) {
+//            throw new IllegalArgumentException("Nationality no debe ser nulo");
+//        } else if (rg.getSecondLastName() == null) {
+//            throw new IllegalArgumentException("Second lastname nulo");
+//        } else if (rg.getCountryOfBirth() == null) {
+//            throw new IllegalArgumentException("Pais de nacimiento nulo");
         } else if (rg.getFaculty() == null) {
             throw new IllegalArgumentException("Facultad nulo");
         } else if (rg.getInstitution() == null) {
