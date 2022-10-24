@@ -1,7 +1,6 @@
 package co.edu.icesi.researchgroupmanagement.model;
 // Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,16 +10,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class GreatRarea implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private long id;
+	
 	private String name;
 	private String description;
-	private Set researchAreas = new HashSet(0);
+	
+	@OneToMany(mappedBy = "greatRarea")
+	private Set<ResearchArea> researchAreas;
 
 	public GreatRarea() {
 	}
@@ -31,7 +35,7 @@ public class GreatRarea implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public GreatRarea(long id, String name, String description, Set researchAreas) {
+	public GreatRarea(long id, String name, String description, Set<ResearchArea> researchAreas) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -62,11 +66,11 @@ public class GreatRarea implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Set getResearchAreas() {
+	public Set<ResearchArea> getResearchAreas() {
 		return this.researchAreas;
 	}
 
-	public void setResearchAreas(Set researchAreas) {
+	public void setResearchAreas(Set<ResearchArea> researchAreas) {
 		this.researchAreas = researchAreas;
 	}
 

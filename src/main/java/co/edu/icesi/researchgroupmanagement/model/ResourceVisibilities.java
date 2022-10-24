@@ -1,7 +1,6 @@
 package co.edu.icesi.researchgroupmanagement.model;
 // Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,15 +10,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class ResourceVisibilities implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private long id;
+	
 	private String visibility;
-	private Set resources = new HashSet(0);
+	
+	@OneToMany(mappedBy = "resourceVisibilities")
+	private Set<Resource> resources;
 
 	public ResourceVisibilities() {
 	}
@@ -29,7 +33,7 @@ public class ResourceVisibilities implements java.io.Serializable {
 		this.visibility = visibility;
 	}
 
-	public ResourceVisibilities(long id, String visibility, Set resources) {
+	public ResourceVisibilities(long id, String visibility, Set<Resource> resources) {
 		this.id = id;
 		this.visibility = visibility;
 		this.resources = resources;
@@ -51,11 +55,11 @@ public class ResourceVisibilities implements java.io.Serializable {
 		this.visibility = visibility;
 	}
 
-	public Set getResources() {
+	public Set<Resource> getResources() {
 		return this.resources;
 	}
 
-	public void setResources(Set resources) {
+	public void setResources(Set<Resource> resources) {
 		this.resources = resources;
 	}
 

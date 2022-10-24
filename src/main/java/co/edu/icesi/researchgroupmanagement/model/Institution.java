@@ -1,7 +1,6 @@
 package co.edu.icesi.researchgroupmanagement.model;
 // Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,15 +10,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Institution implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private long id;
+	
 	private String name;
-	private Set researchGroups = new HashSet(0);
+	
+	@OneToMany(mappedBy = "institution")
+	private Set<ResearchGroup> researchGroups;
 
 	public Institution() {
 	}
@@ -29,7 +33,7 @@ public class Institution implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Institution(long id, String name, Set researchGroups) {
+	public Institution(long id, String name, Set<ResearchGroup> researchGroups) {
 		this.id = id;
 		this.name = name;
 		this.researchGroups = researchGroups;
@@ -51,11 +55,11 @@ public class Institution implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Set getResearchGroups() {
+	public Set<ResearchGroup> getResearchGroups() {
 		return this.researchGroups;
 	}
 
-	public void setResearchGroups(Set researchGroups) {
+	public void setResearchGroups(Set<ResearchGroup> researchGroups) {
 		this.researchGroups = researchGroups;
 	}
 

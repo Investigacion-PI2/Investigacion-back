@@ -1,7 +1,6 @@
 package co.edu.icesi.researchgroupmanagement.model;
 // Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -11,15 +10,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class UserTypes implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private long id;
+	
 	private String type;
-	private Set userses = new HashSet(0);
+	
+	@OneToMany(mappedBy = "userType")
+	private Set<Users> users;
 
 	public UserTypes() {
 	}
@@ -29,10 +33,10 @@ public class UserTypes implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public UserTypes(long id, String type, Set userses) {
+	public UserTypes(long id, String type, Set<Users> users) {
 		this.id = id;
 		this.type = type;
-		this.userses = userses;
+		this.users = users;
 	}
 
 	public long getId() {
@@ -51,12 +55,12 @@ public class UserTypes implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public Set getUserses() {
-		return this.userses;
+	public Set<Users> getUserses() {
+		return this.users;
 	}
 
-	public void setUserses(Set userses) {
-		this.userses = userses;
+	public void setUserses(Set<Users> userses) {
+		this.users = userses;
 	}
 
 }
