@@ -55,6 +55,10 @@ public class ResearchGroupService {
             throw new IllegalArgumentException("Intitucion nula");
         } else if (rg.getSciTiNationalProgram() == null) {
             throw new IllegalArgumentException("SciTiNatProgram nulo");
+        } else if (rg.getUsers() == null) {
+            throw new IllegalArgumentException("El grupo debe tener un lider");
+        } else if (rg.getResearchLines().isEmpty()) {
+            throw new IllegalArgumentException("El grupo debe tener al menos una linea de investigacion");
         } else if (fr.findById(rg.getFaculty().getId()).isEmpty()) {
             throw new IllegalArgumentException("Facultad no existe");
         } else if (ir.findById(rg.getInstitution().getId()).isEmpty()) {
@@ -66,5 +70,15 @@ public class ResearchGroupService {
             return rg;
         }
 
+    }
+
+    @Transactional
+    public Iterable<ResearchGroup> findAll() {
+        return rgr.findAll();
+    }
+
+    @Transactional
+    public ResearchGroup findById(Long id) {
+        return rgr.findById(id).get();
     }
 }
