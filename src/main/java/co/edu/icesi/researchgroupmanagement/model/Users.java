@@ -22,7 +22,7 @@ public class Users implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -68,8 +68,7 @@ public class Users implements java.io.Serializable {
 	public Users() {
 	}
 
-	public Users(long id, String username, String firstName, String lastName, Date dob, String password, String email) {
-		this.id = id;
+	public Users(String username, String firstName, String lastName, Date dob, String password, String email) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -78,10 +77,9 @@ public class Users implements java.io.Serializable {
 		this.email = email;
 	}
 
-	public Users(long id, UserTypes userType, String username, String firstName, String lastName, Date dob,
+	public Users(UserTypes userType, String username, String firstName, String lastName, Date dob,
 			String password, String email, byte[] userPicture, Set<AdmissionRequest> admissionRequests, Set<ResearchGroup> researchGroups,
 			Set<RgroupUsers> rgroupUsers, Set<StudentProgram> studentPrograms, Set<Resource> resources, Set<RprojectUsers> rprojectUsers) {
-		this.id = id;
 		this.userType = userType;
 		this.username = username;
 		this.firstName = firstName;

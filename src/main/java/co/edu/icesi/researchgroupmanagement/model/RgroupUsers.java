@@ -20,7 +20,7 @@ public class RgroupUsers implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private RgroupUsersId id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

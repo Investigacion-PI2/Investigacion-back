@@ -23,7 +23,7 @@ public class ResearchProject implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

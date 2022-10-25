@@ -18,7 +18,7 @@ public class ExternalAuthor implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
 	private String firstName;
