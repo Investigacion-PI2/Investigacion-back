@@ -32,4 +32,9 @@ public class ResearchGroupController {
     public ResearchGroup findById(@PathVariable("id") Long id) {
         return service.findById(id);
     }
+
+    @GetMapping("/{name}")
+    public Iterable<ResearchGroup> findByFacultyName(@PathVariable("name") String name) {
+        return service.findByFaculty(name);
+    }
 }
