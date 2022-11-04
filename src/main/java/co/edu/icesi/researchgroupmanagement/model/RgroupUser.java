@@ -2,12 +2,14 @@ package co.edu.icesi.researchgroupmanagement.model;
 
 import java.util.Date;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,34 +18,36 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "admission_request")
+@Table(name = "rgroup_users")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdmissionRequest implements java.io.Serializable {
+public class RgroupUser implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Id
+	@EmbeddedId
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	private RgroupUserId id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private AdmissionStatus admissionStatus;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("researchGroupId")
+	@JoinColumn(name = "research_project_id")
 	private ResearchGroup researchGroup;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
+	@JoinColumn(name = "users_id")
 	private User user;
 	
-	private String description;
-	private Date startDate;
-	private Date finishDate;
+	private Date userEntry;
+	private Date userExit;
 
-	public AdmissionRequest(long id, Date startDate) {
+	public RgroupUser(RgroupUserId id, ResearchGroup researchGroup, User user, Date userEntry) {
 		this.id = id;
-		this.startDate = startDate;
+		this.researchGroup = researchGroup;
+		this.user = user;
+		this.userEntry = userEntry;
 	}
 
 }

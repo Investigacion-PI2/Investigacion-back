@@ -16,22 +16,22 @@
 		<class>co.edu.icesi.researchgroupmanagement.model.ResearchPaper</class>
 		<class>co.edu.icesi.researchgroupmanagement.model.ResearchProject</class>
 		<class>co.edu.icesi.researchgroupmanagement.model.Resource</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.ResourceVisibilities</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RgroupLeaders</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RgroupLeadersId</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RgroupUsers</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RgroupUsersId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ResourceVisibility</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupLeader</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupLeaderId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupUser</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupUserId</class>
 		<class>co.edu.icesi.researchgroupmanagement.model.RprojectGoal</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RprojectRpapers</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RprojectRpapersId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectRpaper</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectRpaperId</class>
 		<class>co.edu.icesi.researchgroupmanagement.model.RprojectStatus</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RprojectTypes</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RprojectUsers</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.RprojectUsersId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectType</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectUser</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectUserId</class>
 		<class>co.edu.icesi.researchgroupmanagement.model.SciTiNationalProgram</class>
 		<class>co.edu.icesi.researchgroupmanagement.model.StudentProgram</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.Users</class>
-		<class>co.edu.icesi.researchgroupmanagement.model.UserTypes</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.User</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.UserType</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
 </persistence>
