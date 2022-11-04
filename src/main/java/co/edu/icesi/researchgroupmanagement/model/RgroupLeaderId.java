@@ -1,11 +1,20 @@
 package co.edu.icesi.researchgroupmanagement.model;
-// Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Embeddable
-public class RgroupLeadersId implements java.io.Serializable {
+//@Table(name = "rgroup_leaders_id")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class RgroupLeaderId implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "rgroup_id")
@@ -13,38 +22,14 @@ public class RgroupLeadersId implements java.io.Serializable {
 	@Column(name = "leader_id")
 	private long leaderId;
 
-	public RgroupLeadersId() {
-	}
-
-	public RgroupLeadersId(long rgroupId, long leaderId) {
-		this.rgroupId = rgroupId;
-		this.leaderId = leaderId;
-	}
-
-	public long getRgroupId() {
-		return this.rgroupId;
-	}
-
-	public void setRgroupId(long rgroupId) {
-		this.rgroupId = rgroupId;
-	}
-
-	public long getLeaderId() {
-		return this.leaderId;
-	}
-
-	public void setLeaderId(long leaderId) {
-		this.leaderId = leaderId;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
 		if ((other == null))
 			return false;
-		if (!(other instanceof RgroupLeadersId))
+		if (!(other instanceof RgroupLeaderId))
 			return false;
-		RgroupLeadersId castOther = (RgroupLeadersId) other;
+		RgroupLeaderId castOther = (RgroupLeaderId) other;
 
 		return (this.getRgroupId() == castOther.getRgroupId()) && (this.getLeaderId() == castOther.getLeaderId());
 	}

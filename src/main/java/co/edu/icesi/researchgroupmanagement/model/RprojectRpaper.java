@@ -1,12 +1,11 @@
 package co.edu.icesi.researchgroupmanagement.model;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,23 +14,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "rproject_goal")
+@Table(name = "rproject_rpapers")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RprojectGoal implements java.io.Serializable {
+public class RprojectRpaper implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@EmbeddedId
+	private RprojectRpaperId id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("researchPaperId")
+	@JoinColumn(name = "research_paper_id")
+	private ResearchPaper researchPaper;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("researchProjectId")
 	@JoinColumn(name = "research_project_id")
 	private ResearchProject researchProject;
 	
-	private String description;
-	private char isFinished;
+	private byte[] isProjectMember;
 
 }

@@ -15,26 +15,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "faculty")
+@Table(name = "rproject_types")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Faculty implements java.io.Serializable {
+public class RprojectType implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
 	
-	private String name;
+	private String type;
 	
-	@OneToMany(mappedBy = "faculty")
-	private Set<ResearchGroup> researchGroups;
+	@OneToMany(mappedBy = "rprojectType")
+	private Set<ResearchProject> researchProjects;
 
-	public Faculty(long id, String name) {
+	public RprojectType(long id, String type) {
 		this.id = id;
-		this.name = name;
+		this.type = type;
 	}
 
 }

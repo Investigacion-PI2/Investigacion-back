@@ -55,7 +55,7 @@ public class ResearchGroupService {
             throw new IllegalArgumentException("Intitucion nula");
         } else if (rg.getSciTiNationalProgram() == null) {
             throw new IllegalArgumentException("SciTiNatProgram nulo");
-        } else if (rg.getUsers() == null) {
+        } else if (rg.getUser() == null) {
             throw new IllegalArgumentException("El grupo debe tener un lider");
         } else if (rg.getResearchLines().isEmpty()) {
             throw new IllegalArgumentException("El grupo debe tener al menos una linea de investigacion");

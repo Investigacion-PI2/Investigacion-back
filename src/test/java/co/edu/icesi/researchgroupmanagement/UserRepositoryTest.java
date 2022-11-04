@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 
-import co.edu.icesi.researchgroupmanagement.model.Users;
+import co.edu.icesi.researchgroupmanagement.model.User;
 import co.edu.icesi.researchgroupmanagement.repository.UserRepository;
 
 //@ExtendWith(SpringExtension.class)
@@ -50,7 +50,7 @@ public class UserRepositoryTest {
 //  @Sql("data.sql")
   void whenSaved_thenFindsByName() {
 	  
-    userRepository.save(new Users(
+    userRepository.save(new User(
     		"testUsername1",
     		"testFirstname1",
     		"testLastname1",
@@ -58,12 +58,12 @@ public class UserRepositoryTest {
     		"testPassword1",
     		"testEmail1@email.com"));
     
-    Users extractedUser = userRepository.findById(1L).get();
+    User extractedUser = userRepository.findById(1L).get();
     assertThat(extractedUser).isNotNull();
     assertEquals(1, extractedUser.getId());
     assertEquals("testUsername1", extractedUser.getUsername());
 
-    userRepository.save(new Users(
+    userRepository.save(new User(
     		"testUsername2",
     		"testFirstname2",
     		"testLastname2",
@@ -71,7 +71,7 @@ public class UserRepositoryTest {
     		"testPassword2",
     		"testEmail2@email.com"));
     
-    Users extractedUser2 = userRepository.findById(2L).get();
+    User extractedUser2 = userRepository.findById(2L).get();
     assertThat(extractedUser2).isNotNull();
     assertEquals(2, extractedUser2.getId());
     assertEquals("testUsername2", extractedUser2.getUsername());
