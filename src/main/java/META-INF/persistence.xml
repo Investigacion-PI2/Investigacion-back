@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="Investigacion-back">
+		<class>co.edu.icesi.researchgroupmanagement.model.AdmissionRequest</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.AdmissionStatus</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ExternalAuthor</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.Faculty</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.FinancingSource</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.FinancingType</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.GreatRarea</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.Institution</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.MincienciasCategory</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ResearchArea</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ResearchGroup</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ResearchLine</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ResearchPaper</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ResearchProject</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.Resource</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.ResourceVisibility</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupLeader</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupLeaderId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupUser</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RgroupUserId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectGoal</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectRpaper</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectRpaperId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectStatus</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectType</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectUser</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.RprojectUserId</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.SciTiNationalProgram</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.StudentProgram</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.User</class>
+		<class>co.edu.icesi.researchgroupmanagement.model.UserType</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+	</persistence-unit>
+</persistence>
