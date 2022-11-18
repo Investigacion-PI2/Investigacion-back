@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,18 +22,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentProgram implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@SequenceGenerator(name = "STUDENT_PROGRAM_ID_GENERATOR", allocationSize = 1, sequenceName = "STUDENT_PROGRAM_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STUDENT_PROGRAM_ID_GENERATOR")
+	private Long id;
 	
 	private String name;
 	
 	@ManyToMany(mappedBy = "studentPrograms")
 	private Set<User> users;
 
-	public StudentProgram(long id, String name) {
+	public StudentProgram(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}

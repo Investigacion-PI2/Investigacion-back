@@ -15,12 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RprojectRpaperId implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Column(name = "research_project_id")
-	private long researchProjectId;
+	private Long researchProjectId;
 	@Column(name = "research_paper_id")
-	private long researchPaperId;
+	private Long researchPaperId;
 
 	public boolean equals(Object other) {
 		if ((this == other))
@@ -33,14 +33,6 @@ public class RprojectRpaperId implements java.io.Serializable {
 
 		return (this.getResearchProjectId() == castOther.getResearchProjectId())
 				&& (this.getResearchPaperId() == castOther.getResearchPaperId());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (int) this.getResearchProjectId();
-		result = 37 * result + (int) this.getResearchPaperId();
-		return result;
 	}
 
 }

@@ -7,8 +7,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,26 +26,30 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdmissionRequest implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@SequenceGenerator(name = "ADMISSIONSREQUEST_ID_GENERATOR", allocationSize = 1, sequenceName = "ADMISSION_REQUEST_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADMISSIONSREQUEST_ID_GENERATOR")
+	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "admissionRequests"}, allowSetters = true)
 	private AdmissionStatus admissionStatus;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private ResearchGroup researchGroup;
+	@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
+	private ResearchProject researchProject;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
 	private User user;
 	
 	private String description;
 	private Date startDate;
 	private Date finishDate;
 
-	public AdmissionRequest(long id, Date startDate) {
+	public AdmissionRequest(Long id, Date startDate) {
 		this.id = id;
 		this.startDate = startDate;
 	}

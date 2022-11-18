@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,11 +22,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExternalAuthor implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@SequenceGenerator(name = "EXTERNALAUTHOR_ID_GENERATOR", allocationSize = 1, sequenceName = "EXTERNAL_AUTHOR_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EXTERNALAUTHOR_ID_GENERATOR")
+	private Long id;
 	
 	private String firstName;
 	private String lastName;
@@ -33,7 +35,7 @@ public class ExternalAuthor implements java.io.Serializable {
 	@ManyToMany(mappedBy = "externalAuthors")
 	private Set<Resource> resources;
 
-	public ExternalAuthor(long id, String firstName, String lastName) {
+	public ExternalAuthor(Long id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;

@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Embeddable
-//@Table(name = "RprojectUsersId")
+//@Table(name = "RRprojectUserId")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RprojectUserId implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Column(name = "research_project_id")
-	private long researchProjectId;
+	private Long researchProjectId;
 	@Column(name = "users_id")
-	private long userId;
+	private Long userId;
 
 	public boolean equals(Object other) {
 		if ((this == other))
@@ -33,14 +33,6 @@ public class RprojectUserId implements java.io.Serializable {
 
 		return (this.getResearchProjectId() == castOther.getResearchProjectId())
 				&& (this.getUserId() == castOther.getUserId());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (int) this.getResearchProjectId();
-		result = 37 * result + (int) this.getUserId();
-		return result;
 	}
 
 }
