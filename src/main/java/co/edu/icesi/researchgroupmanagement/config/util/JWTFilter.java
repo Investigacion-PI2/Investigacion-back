@@ -1,7 +1,6 @@
-package co.edu.icesi.researchgroupmanagement.config;
+package co.edu.icesi.researchgroupmanagement.config.util;
 
-import co.edu.icesi.researchgroupmanagement.config.util.JWTUtil;
-import co.edu.icesi.researchgroupmanagement.service.CustomUserDetailsService;
+import co.edu.icesi.researchgroupmanagement.service.UserDetailsServiceImp;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 
@@ -11,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -20,20 +20,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JwtFilter extends OncePerRequestFilter {
+public class JWTFilter extends OncePerRequestFilter {
 
     @Autowired
     private JWTUtil jwtUtil;
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private UserDetailsServiceImp userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader("Authorization");
-
         try {
-            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer")) {
+            String authorizationHeader = request.getHeader("Authorization");
+            if (StringUtils.hasText(authorizationHeader) && authorizationHeader.startsWith("Bearer")) {
                 String jwt = authorizationHeader.substring(7);
                 String username = jwtUtil.getUsernameFromToken(jwt);
     
@@ -49,7 +48,6 @@ public class JwtFilter extends OncePerRequestFilter {
                     }
                 }
             }
-
         } catch (ExpiredJwtException | SignatureException exception) {
             // this returns to login
         } finally {

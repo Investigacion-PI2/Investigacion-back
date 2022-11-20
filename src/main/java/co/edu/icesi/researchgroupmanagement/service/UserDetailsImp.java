@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,27 +14,28 @@ import co.edu.icesi.researchgroupmanagement.model.User;
 import co.edu.icesi.researchgroupmanagement.repository.UserTypeRepository;
 
 
-public class CustomUserDetails implements UserDetails {
+public class UserDetailsImp implements UserDetails {
 
     private User user;
-    private UserTypeRepository userTypeRepository;
 
-    public CustomUserDetails(User user, UserTypeRepository userTypeRepository) {
+    @Autowired
+    UserTypeRepository userTypeRepository;
+
+    public UserDetailsImp(User user) {
         this.user = user;
-        this.userTypeRepository = userTypeRepository;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         //roles.forEach(role -> authorities.add(new SimpleGrantedAuthority("TYPE_" + role.getName())));
-        authorities.add(new SimpleGrantedAuthority("TYPE_" + userTypeRepository.findById(user.getUserType().getId())));
+        authorities.add(new SimpleGrantedAuthority("TYPE_DEV"));
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return new BCryptPasswordEncoder(6).encode(user.getPassword());
+        return new BCryptPasswordEncoder().encode(user.getPassword());
     }
     @Override
     public String getUsername() {
