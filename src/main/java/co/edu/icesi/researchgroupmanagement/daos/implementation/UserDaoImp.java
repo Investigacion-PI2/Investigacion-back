@@ -8,12 +8,15 @@ import javax.persistence.Query;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.UserDao;
 import co.edu.icesi.researchgroupmanagement.model.User;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class UserDaoImp implements UserDao {
 
 	@PersistenceContext
@@ -44,12 +47,12 @@ public class UserDaoImp implements UserDao {
 	}
 
 	@Override
-	public User findById(Integer userId) {
+	public User findById(Long userId) {
 		return em.find(User.class, userId);
 	}
 
 	@Override
-	public boolean existsById(Integer userId) {
+	public boolean existsById(Long userId) {
 		if (em.find(User.class, userId) != null)
 			return true;
 		return false;

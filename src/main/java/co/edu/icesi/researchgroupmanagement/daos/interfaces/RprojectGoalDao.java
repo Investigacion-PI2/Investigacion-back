@@ -10,6 +10,6 @@ public interface RprojectGoalDao {
 	public RprojectGoal update(RprojectGoal entity);
 	public void delete (RprojectGoal entity);
 	public List<RprojectGoal> findAll();
-	public RprojectGoal findById(Integer id);
-	public boolean existsById(Integer id);
+	public RprojectGoal findById(Long id);
+	public boolean existsById(Long id);
 }

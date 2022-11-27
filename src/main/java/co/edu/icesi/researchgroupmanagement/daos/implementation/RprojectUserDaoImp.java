@@ -7,12 +7,14 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.RprojectUserDao;
 import co.edu.icesi.researchgroupmanagement.model.RprojectUser;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class RprojectUserDaoImp implements RprojectUserDao {
 
 	@PersistenceContext
@@ -20,8 +22,7 @@ public class RprojectUserDaoImp implements RprojectUserDao {
 	
 	@Override
 	public RprojectUser save(RprojectUser entity) {
-		em.persist(entity);
-		return entity;
+		return update(entity);
 	}
 
 	@Override
@@ -43,12 +44,12 @@ public class RprojectUserDaoImp implements RprojectUserDao {
 	}
 
 	@Override
-	public RprojectUser findById(Integer entityId) {
+	public RprojectUser findById(Long entityId) {
 		return em.find(RprojectUser.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(RprojectUser.class, entityId) != null)
 			return true;
 		return false;

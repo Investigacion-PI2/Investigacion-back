@@ -10,6 +10,6 @@ public interface RprojectRpaperDao {
 	public RprojectRpaper update(RprojectRpaper entity);
 	public void delete (RprojectRpaper entity);
 	public List<RprojectRpaper> findAll();
-	public RprojectRpaper findById(Integer id);
-	public boolean existsById(Integer id);
+	public RprojectRpaper findById(Long id);
+	public boolean existsById(Long id);
 }

@@ -11,8 +11,11 @@ import org.springframework.stereotype.Repository;
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.AdmissionRequestDao;
 import co.edu.icesi.researchgroupmanagement.model.AdmissionRequest;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Repository
 @Scope("singleton")
+@Transactional
 public class AdmissionRequestDaoImp implements AdmissionRequestDao {
 
 	@PersistenceContext
@@ -43,12 +46,12 @@ public class AdmissionRequestDaoImp implements AdmissionRequestDao {
 	}
 
 	@Override
-	public AdmissionRequest findById(Integer entityId) {
+	public AdmissionRequest findById(Long entityId) {
 		return em.find(AdmissionRequest.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(AdmissionRequest.class, entityId) != null)
 			return true;
 		return false;

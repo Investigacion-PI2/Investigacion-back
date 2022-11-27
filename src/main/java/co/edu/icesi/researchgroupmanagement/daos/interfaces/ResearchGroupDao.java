@@ -11,7 +11,7 @@ public interface ResearchGroupDao {
 	public ResearchGroup update(ResearchGroup rg);
 	public void delete (ResearchGroup rg);
 	public List<ResearchGroup> findAll();
-	public ResearchGroup findById(Integer rg);
-	public boolean existsById(Integer rg);
+	public ResearchGroup findById(Long rg);
+	public boolean existsById(Long rg);
 	List<ResearchGroup> findByFaculty(String name);
 }

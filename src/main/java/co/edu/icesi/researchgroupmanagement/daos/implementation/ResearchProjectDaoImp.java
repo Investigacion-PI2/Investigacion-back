@@ -7,12 +7,14 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.ResearchProjectDao;
 import co.edu.icesi.researchgroupmanagement.model.ResearchProject;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class ResearchProjectDaoImp implements ResearchProjectDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class ResearchProjectDaoImp implements ResearchProjectDao {
 	}
 
 	@Override
-	public ResearchProject findById(Integer entityId) {
+	public ResearchProject findById(Long entityId) {
 		return em.find(ResearchProject.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(ResearchProject.class, entityId) != null)
 			return true;
 		return false;

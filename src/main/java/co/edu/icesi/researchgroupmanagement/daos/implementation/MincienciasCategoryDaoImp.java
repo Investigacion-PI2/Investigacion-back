@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.MincienciasCategoryDao;
 import co.edu.icesi.researchgroupmanagement.model.MincienciasCategory;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class MincienciasCategoryDaoImp implements MincienciasCategoryDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class MincienciasCategoryDaoImp implements MincienciasCategoryDao {
 	}
 
 	@Override
-	public MincienciasCategory findById(Integer mcategoryId) {
+	public MincienciasCategory findById(Long mcategoryId) {
 		return em.find(MincienciasCategory.class, mcategoryId);
 	}
 
 	@Override
-	public boolean existsById(Integer mcategoryId) {
+	public boolean existsById(Long mcategoryId) {
 		if (em.find(MincienciasCategory.class, mcategoryId) != null)
 			return true;
 		return false;

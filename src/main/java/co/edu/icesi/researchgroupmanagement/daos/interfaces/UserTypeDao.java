@@ -11,6 +11,6 @@ public interface UserTypeDao {
 	public UserType update(UserType ut);
 	public void delete (UserType ut);
 	public List<UserType> findAll();
-	public UserType findById(Integer id);
-	public boolean existsById(Integer id);
+	public UserType findById(Long id);
+	public boolean existsById(Long id);
 }

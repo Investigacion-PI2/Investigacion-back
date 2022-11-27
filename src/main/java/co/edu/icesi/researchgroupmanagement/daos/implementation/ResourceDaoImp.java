@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.ResourceDao;
 import co.edu.icesi.researchgroupmanagement.model.Resource;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class ResourceDaoImp implements ResourceDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class ResourceDaoImp implements ResourceDao {
 	}
 
 	@Override
-	public Resource findById(Integer entityId) {
+	public Resource findById(Long entityId) {
 		return em.find(Resource.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(Resource.class, entityId) != null)
 			return true;
 		return false;

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.FinancingTypeDao;
 import co.edu.icesi.researchgroupmanagement.model.FinancingType;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class FinancingTypeDaoImp implements FinancingTypeDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class FinancingTypeDaoImp implements FinancingTypeDao {
 	}
 
 	@Override
-	public FinancingType findById(Integer ftypeId) {
+	public FinancingType findById(Long ftypeId) {
 		return em.find(FinancingType.class, ftypeId);
 	}
 
 	@Override
-	public boolean existsById(Integer ftypeId) {
+	public boolean existsById(Long ftypeId) {
 		if (em.find(FinancingType.class, ftypeId) != null)
 			return true;
 		return false;

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.ResearchPaperDao;
 import co.edu.icesi.researchgroupmanagement.model.ResearchPaper;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class ResearchPaperDaoImp implements ResearchPaperDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class ResearchPaperDaoImp implements ResearchPaperDao {
 	}
 
 	@Override
-	public ResearchPaper findById(Integer entityId) {
+	public ResearchPaper findById(Long entityId) {
 		return em.find(ResearchPaper.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(ResearchPaper.class, entityId) != null)
 			return true;
 		return false;

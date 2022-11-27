@@ -10,18 +10,20 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.RgroupUserDao;
 import co.edu.icesi.researchgroupmanagement.model.RgroupUser;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class RgroupUserDaoImp implements RgroupUserDao {
 
 	@PersistenceContext
 	private EntityManager em;
 	
+	// Must use merge because its related model class uses an embedded id.
 	@Override
 	public RgroupUser save(RgroupUser entity) {
-		em.persist(entity);
-		return entity;
+		return update(entity);
 	}
 
 	@Override
@@ -43,12 +45,12 @@ public class RgroupUserDaoImp implements RgroupUserDao {
 	}
 
 	@Override
-	public RgroupUser findById(Integer entityId) {
+	public RgroupUser findById(Long entityId) {
 		return em.find(RgroupUser.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(RgroupUser.class, entityId) != null)
 			return true;
 		return false;

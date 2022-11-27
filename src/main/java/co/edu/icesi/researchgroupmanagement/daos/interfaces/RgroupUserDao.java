@@ -10,6 +10,6 @@ public interface RgroupUserDao {
 	public RgroupUser update(RgroupUser entity);
 	public void delete (RgroupUser entity);
 	public List<RgroupUser> findAll();
-	public RgroupUser findById(Integer id);
-	public boolean existsById(Integer id);
+	public RgroupUser findById(Long id);
+	public boolean existsById(Long id);
 }

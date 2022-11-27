@@ -11,6 +11,6 @@ public interface FinancingTypeDao {
 	public FinancingType update(FinancingType ft);
 	public void delete (FinancingType ft);
 	public List<FinancingType> findAll();
-	public FinancingType findById(Integer id);
-	public boolean existsById(Integer id);
+	public FinancingType findById(Long id);
+	public boolean existsById(Long id);
 }

@@ -26,7 +26,7 @@ public class RprojectUser implements java.io.Serializable {
 	private static final Long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private RprojectUserId id;
+	private RprojectUserId id = new RprojectUserId();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @MapsId("researchProjectId")

@@ -11,6 +11,6 @@ public interface SciTiNationalProgramDao {
 	public SciTiNationalProgram update(SciTiNationalProgram stnp);
 	public void delete (SciTiNationalProgram stnp);
 	public List<SciTiNationalProgram> findAll();
-	public SciTiNationalProgram findById(Integer id);
-	public boolean existsById(Integer id);
+	public SciTiNationalProgram findById(Long id);
+	public boolean existsById(Long id);
 }

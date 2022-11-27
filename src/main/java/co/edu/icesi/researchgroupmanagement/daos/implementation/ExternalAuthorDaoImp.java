@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.ExternalAuthorDao;
 import co.edu.icesi.researchgroupmanagement.model.ExternalAuthor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class ExternalAuthorDaoImp implements ExternalAuthorDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class ExternalAuthorDaoImp implements ExternalAuthorDao {
 	}
 
 	@Override
-	public ExternalAuthor findById(Integer eauthorId) {
+	public ExternalAuthor findById(Long eauthorId) {
 		return em.find(ExternalAuthor.class, eauthorId);
 	}
 
 	@Override
-	public boolean existsById(Integer eauthorId) {
+	public boolean existsById(Long eauthorId) {
 		if (em.find(ExternalAuthor.class, eauthorId) != null)
 			return true;
 		return false;

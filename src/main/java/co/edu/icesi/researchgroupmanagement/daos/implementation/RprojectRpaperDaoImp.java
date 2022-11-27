@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.RprojectRpaperDao;
 import co.edu.icesi.researchgroupmanagement.model.RprojectRpaper;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class RprojectRpaperDaoImp implements RprojectRpaperDao {
 
 	@PersistenceContext
@@ -20,8 +22,7 @@ public class RprojectRpaperDaoImp implements RprojectRpaperDao {
 	
 	@Override
 	public RprojectRpaper save(RprojectRpaper entity) {
-		em.persist(entity);
-		return entity;
+		return update(entity);
 	}
 
 	@Override
@@ -43,12 +44,12 @@ public class RprojectRpaperDaoImp implements RprojectRpaperDao {
 	}
 
 	@Override
-	public RprojectRpaper findById(Integer entityId) {
+	public RprojectRpaper findById(Long entityId) {
 		return em.find(RprojectRpaper.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(RprojectRpaper.class, entityId) != null)
 			return true;
 		return false;

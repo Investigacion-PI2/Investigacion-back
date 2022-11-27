@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.ResourceVisibilityDao;
 import co.edu.icesi.researchgroupmanagement.model.ResourceVisibility;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class ResourceVisibilityDaoImp implements ResourceVisibilityDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class ResourceVisibilityDaoImp implements ResourceVisibilityDao {
 	}
 
 	@Override
-	public ResourceVisibility findById(Integer entityId) {
+	public ResourceVisibility findById(Long entityId) {
 		return em.find(ResourceVisibility.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(ResourceVisibility.class, entityId) != null)
 			return true;
 		return false;

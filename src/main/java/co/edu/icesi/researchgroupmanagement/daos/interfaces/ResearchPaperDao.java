@@ -10,6 +10,6 @@ public interface ResearchPaperDao {
 	public ResearchPaper update(ResearchPaper entity);
 	public void delete (ResearchPaper entity);
 	public List<ResearchPaper> findAll();
-	public ResearchPaper findById(Integer id);
-	public boolean existsById(Integer id);
+	public ResearchPaper findById(Long id);
+	public boolean existsById(Long id);
 }

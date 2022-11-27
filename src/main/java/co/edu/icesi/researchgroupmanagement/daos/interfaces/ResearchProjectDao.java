@@ -10,6 +10,6 @@ public interface ResearchProjectDao {
 	public ResearchProject update(ResearchProject entity);
 	public void delete (ResearchProject entity);
 	public List<ResearchProject> findAll();
-	public ResearchProject findById(Integer id);
-	public boolean existsById(Integer id);
+	public boolean existsById(Long id);
+	public ResearchProject findById(Long entityId);
 }

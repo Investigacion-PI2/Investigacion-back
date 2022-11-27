@@ -67,13 +67,13 @@ public class ResearchProject implements java.io.Serializable {
 	private RprojectType rprojectType;
 	
 	
-	@NotNull
+//	@NotNull
 	private String title;
-	@NotNull
+//	@NotNull
 	private String description;
-	@PastOrPresent
+//	@PastOrPresent
 	private Date startDate;
-	@Future
+//	@Future
 	private Date finishDate;
 	
 	@ManyToMany(mappedBy = "researchProjects")

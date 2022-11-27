@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.RprojectGoalDao;
 import co.edu.icesi.researchgroupmanagement.model.RprojectGoal;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class RprojectGoalDaoImp implements RprojectGoalDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class RprojectGoalDaoImp implements RprojectGoalDao {
 	}
 
 	@Override
-	public RprojectGoal findById(Integer entityId) {
+	public RprojectGoal findById(Long entityId) {
 		return em.find(RprojectGoal.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(RprojectGoal.class, entityId) != null)
 			return true;
 		return false;

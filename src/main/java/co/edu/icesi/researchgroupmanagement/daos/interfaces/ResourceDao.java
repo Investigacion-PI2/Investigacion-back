@@ -10,6 +10,6 @@ public interface ResourceDao {
 	public Resource update(Resource entity);
 	public void delete (Resource entity);
 	public List<Resource> findAll();
-	public Resource findById(Integer id);
-	public boolean existsById(Integer id);
+	public Resource findById(Long id);
+	public boolean existsById(Long id);
 }

@@ -10,6 +10,6 @@ public interface AdmissionRequestDao {
 	public AdmissionRequest update(AdmissionRequest entity);
 	public void delete (AdmissionRequest entity);
 	public List<AdmissionRequest> findAll();
-	public AdmissionRequest findById(Integer id);
-	public boolean existsById(Integer id);
+	public AdmissionRequest findById(Long id);
+	public boolean existsById(Long id);
 }

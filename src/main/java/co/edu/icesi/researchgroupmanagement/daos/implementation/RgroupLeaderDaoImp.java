@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.RgroupLeaderDao;
 import co.edu.icesi.researchgroupmanagement.model.RgroupLeader;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class RgroupLeaderDaoImp implements RgroupLeaderDao {
 
 	@PersistenceContext
@@ -20,8 +22,7 @@ public class RgroupLeaderDaoImp implements RgroupLeaderDao {
 	
 	@Override
 	public RgroupLeader save(RgroupLeader entity) {
-		em.persist(entity);
-		return entity;
+		return update(entity);
 	}
 
 	@Override
@@ -43,12 +44,12 @@ public class RgroupLeaderDaoImp implements RgroupLeaderDao {
 	}
 
 	@Override
-	public RgroupLeader findById(Integer entityId) {
+	public RgroupLeader findById(Long entityId) {
 		return em.find(RgroupLeader.class, entityId);
 	}
 
 	@Override
-	public boolean existsById(Integer entityId) {
+	public boolean existsById(Long entityId) {
 		if (em.find(RgroupLeader.class, entityId) != null)
 			return true;
 		return false;

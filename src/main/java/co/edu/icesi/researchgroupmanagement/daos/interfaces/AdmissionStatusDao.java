@@ -11,6 +11,6 @@ public interface AdmissionStatusDao {
 	public AdmissionStatus update(AdmissionStatus as);
 	public void delete (AdmissionStatus as);
 	public List<AdmissionStatus> findAll();
-	public AdmissionStatus findById(Integer id);
-	public boolean existsById(Integer id);
+	public AdmissionStatus findById(Long id);
+	public boolean existsById(Long id);
 }

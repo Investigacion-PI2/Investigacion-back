@@ -10,6 +10,6 @@ public interface ResourceVisibilityDao {
 	public ResourceVisibility update(ResourceVisibility entity);
 	public void delete (ResourceVisibility entity);
 	public List<ResourceVisibility> findAll();
-	public ResourceVisibility findById(Integer id);
-	public boolean existsById(Integer id);
+	public ResourceVisibility findById(Long id);
+	public boolean existsById(Long id);
 }

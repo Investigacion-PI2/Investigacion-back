@@ -13,26 +13,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.researchgroupmanagement.daos.implementation.UserDaoImp;
 import co.edu.icesi.researchgroupmanagement.model.User;
 
 //@ExtendWith(SpringExtension.class)
-@DataJpaTest
+//@DataJpaTest
 //@TestPropertySource(properties = {
 //        "spring.jpa.hibernate.ddl-auto=validate",
 //        "spring.datasource.initialization-mode=always"
 //})
 //@ContextConfiguration(classes = ResearchGroupManagementApplication.class)
 //@ActiveProfiles("test")
-@TestPropertySource("/application.properties")
+//@TestPropertySource("/application.properties")
 //@RunWith(SpringRunner.class)
-@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(classes= UserDaoImp.class, loader=AnnotationConfigContextLoader.class)
-@EnableAutoConfiguration(exclude=AutoConfigureTestDatabase.class)
+//@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
+//@EnableAutoConfiguration(exclude=AutoConfigureTestDatabase.class)
+@SpringBootTest
+@ContextConfiguration(classes= UserDaoImp.class)
+//@ContextConfiguration(classes= UserDaoImp.class, loader=AnnotationConfigContextLoader.class)
 public class UserDaoTest {
 
 //  @Autowired
@@ -55,6 +59,7 @@ public class UserDaoTest {
   }
   
   @Test
+  @Transactional
 //  @Sql("data.sql")
   void whenSaved_thenFindsByName() {
 

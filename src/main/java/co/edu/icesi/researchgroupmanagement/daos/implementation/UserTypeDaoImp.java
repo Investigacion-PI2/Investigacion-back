@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.UserTypeDao;
 import co.edu.icesi.researchgroupmanagement.model.UserType;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class UserTypeDaoImp implements UserTypeDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class UserTypeDaoImp implements UserTypeDao {
 	}
 
 	@Override
-	public UserType findById(Integer userTypeId) {
+	public UserType findById(Long userTypeId) {
 		return em.find(UserType.class, userTypeId);
 	}
 
 	@Override
-	public boolean existsById(Integer userTypeId) {
+	public boolean existsById(Long userTypeId) {
 		if (em.find(UserType.class, userTypeId) != null)
 			return true;
 		return false;

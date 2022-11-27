@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.FacultyDao;
 import co.edu.icesi.researchgroupmanagement.model.Faculty;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class FacultyDaoImp implements FacultyDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class FacultyDaoImp implements FacultyDao {
 	}
 
 	@Override
-	public Faculty findById(Integer facultyId) {
+	public Faculty findById(Long facultyId) {
 		return em.find(Faculty.class, facultyId);
 	}
 
 	@Override
-	public boolean existsById(Integer facultyId) {
+	public boolean existsById(Long facultyId) {
 		if (em.find(Faculty.class, facultyId) != null)
 			return true;
 		return false;

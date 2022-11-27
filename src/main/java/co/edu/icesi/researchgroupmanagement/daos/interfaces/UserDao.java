@@ -10,7 +10,7 @@ public interface UserDao {
 	public User update(User u);
 	public void delete (User u);
 	public List<User> findAll();
-	public User findById(Integer id);
-	public boolean existsById(Integer id);
+	public boolean existsById(Long id);
 	User findByUsername(String username);
+	public User findById(Long userId);
 }

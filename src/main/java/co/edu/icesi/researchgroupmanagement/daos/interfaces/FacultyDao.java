@@ -10,6 +10,6 @@ public interface FacultyDao {
 	public Faculty update(Faculty f);
 	public void delete (Faculty f);
 	public List<Faculty> findAll();
-	public Faculty findById(Integer id);
-	public boolean existsById(Integer id);
+	public Faculty findById(Long id);
+	public boolean existsById(Long id);
 }

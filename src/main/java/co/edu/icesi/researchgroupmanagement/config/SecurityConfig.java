@@ -50,7 +50,8 @@ public class SecurityConfig {
         http.csrf().disable().cors().disable()
             .authorizeRequests((authz) -> authz
                 .antMatchers("/**/authenticate").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest()
+                .authenticated()
             )
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

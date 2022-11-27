@@ -10,6 +10,6 @@ public interface RprojectTypeDao {
 	public RprojectType update(RprojectType entity);
 	public void delete (RprojectType entity);
 	public List<RprojectType> findAll();
-	public RprojectType findById(Integer id);
-	public boolean existsById(Integer id);
+	public RprojectType findById(Long id);
+	public boolean existsById(Long id);
 }

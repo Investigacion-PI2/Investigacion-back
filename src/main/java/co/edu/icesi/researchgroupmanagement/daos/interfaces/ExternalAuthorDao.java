@@ -11,6 +11,6 @@ public interface ExternalAuthorDao {
 	public ExternalAuthor update(ExternalAuthor ea);
 	public void delete (ExternalAuthor ea);
 	public List<ExternalAuthor> findAll();
-	public ExternalAuthor findById(Integer id);
-	public boolean existsById(Integer id);
+	public ExternalAuthor findById(Long id);
+	public boolean existsById(Long id);
 }

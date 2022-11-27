@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.InstitutionDao;
 import co.edu.icesi.researchgroupmanagement.model.Institution;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class InstitutionDaoImp implements InstitutionDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class InstitutionDaoImp implements InstitutionDao {
 	}
 
 	@Override
-	public Institution findById(Integer institutionId) {
+	public Institution findById(Long institutionId) {
 		return em.find(Institution.class, institutionId);
 	}
 
 	@Override
-	public boolean existsById(Integer institutionId) {
+	public boolean existsById(Long institutionId) {
 		if (em.find(Institution.class, institutionId) != null)
 			return true;
 		return false;

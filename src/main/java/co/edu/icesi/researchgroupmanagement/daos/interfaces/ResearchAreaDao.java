@@ -10,6 +10,6 @@ public interface ResearchAreaDao {
 	public ResearchArea update(ResearchArea entity);
 	public void delete (ResearchArea entity);
 	public List<ResearchArea> findAll();
-	public ResearchArea findById(Integer id);
-	public boolean existsById(Integer id);
+	public ResearchArea findById(Long id);
+	public boolean existsById(Long id);
 }

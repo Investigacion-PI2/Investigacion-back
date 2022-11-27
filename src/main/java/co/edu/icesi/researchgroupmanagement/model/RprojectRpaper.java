@@ -23,7 +23,7 @@ public class RprojectRpaper implements java.io.Serializable {
 	private static final Long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private RprojectRpaperId id;
+	private RprojectRpaperId id = new RprojectRpaperId();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @MapsId("researchPaperId")

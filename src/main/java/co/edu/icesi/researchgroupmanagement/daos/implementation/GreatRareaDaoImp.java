@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.GreatRareaDao;
 import co.edu.icesi.researchgroupmanagement.model.GreatRarea;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class GreatRareaDaoImp implements GreatRareaDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class GreatRareaDaoImp implements GreatRareaDao {
 	}
 
 	@Override
-	public GreatRarea findById(Integer grareaId) {
+	public GreatRarea findById(Long grareaId) {
 		return em.find(GreatRarea.class, grareaId);
 	}
 
 	@Override
-	public boolean existsById(Integer grareaId) {
+	public boolean existsById(Long grareaId) {
 		if (em.find(GreatRarea.class, grareaId) != null)
 			return true;
 		return false;

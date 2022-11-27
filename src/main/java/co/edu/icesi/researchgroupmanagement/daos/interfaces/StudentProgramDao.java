@@ -10,6 +10,6 @@ public interface StudentProgramDao {
 	public StudentProgram update(StudentProgram entity);
 	public void delete (StudentProgram entity);
 	public List<StudentProgram> findAll();
-	public StudentProgram findById(Integer id);
-	public boolean existsById(Integer id);
+	public StudentProgram findById(Long id);
+	public boolean existsById(Long id);
 }

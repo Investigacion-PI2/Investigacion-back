@@ -10,6 +10,6 @@ public interface RprojectUserDao {
 	public RprojectUser update(RprojectUser entity);
 	public void delete (RprojectUser entity);
 	public List<RprojectUser> findAll();
-	public RprojectUser findById(Integer id);
-	public boolean existsById(Integer id);
+	public boolean existsById(Long id);
+	public RprojectUser findById(Long entityId);
 }

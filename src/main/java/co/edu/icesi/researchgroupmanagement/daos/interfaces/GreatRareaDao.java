@@ -11,6 +11,6 @@ public interface GreatRareaDao {
 	public GreatRarea update(GreatRarea gra);
 	public void delete (GreatRarea gra);
 	public List<GreatRarea> findAll();
-	public GreatRarea findById(Integer id);
-	public boolean existsById(Integer id);
+	public GreatRarea findById(Long id);
+	public boolean existsById(Long id);
 }

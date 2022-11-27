@@ -27,8 +27,7 @@ public class RgroupUser implements java.io.Serializable {
 	private static final Long serialVersionUID = 1L;
 	
 	@EmbeddedId
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private RgroupUserId id;
+	private RgroupUserId id = new RgroupUserId();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @MapsId("researchGroupId")

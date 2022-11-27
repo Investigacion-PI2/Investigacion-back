@@ -21,6 +21,7 @@ public class RprojectUserId implements java.io.Serializable {
 	private Long researchProjectId;
 	@Column(name = "users_id")
 	private Long userId;
+	
 
 	public boolean equals(Object other) {
 		if ((this == other))

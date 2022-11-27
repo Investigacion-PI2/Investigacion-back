@@ -5,23 +5,23 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.ResearchGroupDao;
 import co.edu.icesi.researchgroupmanagement.model.ResearchGroup;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class ResearchGroupDaoImp implements ResearchGroupDao {
 
 	@PersistenceContext
 	private EntityManager em;
 	
 	@Override
-    @Transactional
 	public ResearchGroup save(ResearchGroup rg) {
 		em.persist(rg);
 		return rg;
@@ -48,7 +48,7 @@ public class ResearchGroupDaoImp implements ResearchGroupDao {
 	}
 
 	@Override
-	public ResearchGroup findById(Integer rgroupId) {
+	public ResearchGroup findById(Long rgroupId) {
 		return em.find(ResearchGroup.class, rgroupId);
 	}
 
@@ -60,7 +60,7 @@ public class ResearchGroupDaoImp implements ResearchGroupDao {
 //  }
 
 	@Override
-	public boolean existsById(Integer rgroupId) {
+	public boolean existsById(Long rgroupId) {
 		if (em.find(ResearchGroup.class, rgroupId) != null)
 			return true;
 		return false;

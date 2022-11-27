@@ -10,6 +10,6 @@ public interface RgroupLeaderDao {
 	public RgroupLeader update(RgroupLeader entity);
 	public void delete (RgroupLeader entity);
 	public List<RgroupLeader> findAll();
-	public RgroupLeader findById(Integer id);
-	public boolean existsById(Integer id);
+	public RgroupLeader findById(Long id);
+	public boolean existsById(Long id);
 }

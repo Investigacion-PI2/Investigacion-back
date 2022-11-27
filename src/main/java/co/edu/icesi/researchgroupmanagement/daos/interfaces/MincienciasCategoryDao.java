@@ -10,6 +10,6 @@ public interface MincienciasCategoryDao {
 	public MincienciasCategory update(MincienciasCategory mat);
 	public void delete (MincienciasCategory mcat);
 	public List<MincienciasCategory> findAll();
-	public MincienciasCategory findById(Integer id);
-	public boolean existsById(Integer id);
+	public MincienciasCategory findById(Long id);
+	public boolean existsById(Long id);
 }

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import co.edu.icesi.researchgroupmanagement.daos.interfaces.SciTiNationalProgramDao;
 import co.edu.icesi.researchgroupmanagement.model.SciTiNationalProgram;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Scope("singleton")
+@Transactional
 public class SciTiNationalProgramDaoImp implements SciTiNationalProgramDao {
 
 	@PersistenceContext
@@ -43,12 +45,12 @@ public class SciTiNationalProgramDaoImp implements SciTiNationalProgramDao {
 	}
 
 	@Override
-	public SciTiNationalProgram findById(Integer stnpId) {
+	public SciTiNationalProgram findById(Long stnpId) {
 		return em.find(SciTiNationalProgram.class, stnpId);
 	}
 
 	@Override
-	public boolean existsById(Integer stnpId) {
+	public boolean existsById(Long stnpId) {
 		if (em.find(SciTiNationalProgram.class, stnpId) != null)
 			return true;
 		return false;

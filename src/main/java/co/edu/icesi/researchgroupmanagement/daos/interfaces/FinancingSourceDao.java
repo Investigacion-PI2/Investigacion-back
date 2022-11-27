@@ -11,6 +11,6 @@ public interface FinancingSourceDao {
 	public FinancingSource update(FinancingSource fs);
 	public void delete (FinancingSource fs);
 	public List<FinancingSource> findAll();
-	public FinancingSource findById(Integer id);
-	public boolean existsById(Integer id);
+	public FinancingSource findById(Long id);
+	public boolean existsById(Long id);
 }

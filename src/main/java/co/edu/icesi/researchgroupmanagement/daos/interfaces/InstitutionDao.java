@@ -11,6 +11,6 @@ public interface InstitutionDao {
 	public Institution update(Institution i);
 	public void delete (Institution i);
 	public List<Institution> findAll();
-	public Institution findById(Integer id);
-	public boolean existsById(Integer id);
+	public Institution findById(Long id);
+	public boolean existsById(Long id);
 }

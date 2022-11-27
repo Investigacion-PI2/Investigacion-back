@@ -10,6 +10,6 @@ public interface ResearchLineDao {
 	public ResearchLine update(ResearchLine entity);
 	public void delete (ResearchLine entity);
 	public List<ResearchLine> findAll();
-	public ResearchLine findById(Integer id);
-	public boolean existsById(Integer id);
+	public ResearchLine findById(Long id);
+	public boolean existsById(Long id);
 }
