@@ -8,21 +8,17 @@ import org.springframework.stereotype.Service;
 
 import co.edu.icesi.researchgroupmanagement.model.User;
 import co.edu.icesi.researchgroupmanagement.repository.UserRepository;
-import co.edu.icesi.researchgroupmanagement.repository.UserTypeRepository;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService  {
-    @Autowired
-    UserRepository userRepository;
+public class UserDetailsServiceImp implements UserDetailsService  {
 
     @Autowired
-    UserTypeRepository userTypeRepository;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
-        System.out.println(user.getUsername());
-        return new CustomUserDetails(user, userTypeRepository);
+        return new UserDetailsImp(user);
     }
     
 }

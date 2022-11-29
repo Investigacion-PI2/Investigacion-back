@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.icesi.researchgroupmanagement.config.util.JWTUtil;
 import co.edu.icesi.researchgroupmanagement.dto.AuthRequest;
-import co.edu.icesi.researchgroupmanagement.service.CustomUserDetailsService;
+import co.edu.icesi.researchgroupmanagement.dto.AuthResponse;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -26,18 +27,15 @@ public class AuthController {
     @Autowired
     private JWTUtil jwtUtil;
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
-
     @PostMapping(value = "authenticate", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) {
         try {
-            authManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-            UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
+            final Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
             String token = jwtUtil.generateToken(userDetails);
-            return ResponseEntity.status(HttpStatus.OK).body(token);
+            return ResponseEntity.status(HttpStatus.OK).body(new AuthResponse(token));
         } catch (BadCredentialsException exception) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 
