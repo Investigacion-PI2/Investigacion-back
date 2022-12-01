@@ -30,6 +30,7 @@ public class ResearchGroupController {
 
     @GetMapping("/{id}")
     public ResearchGroup findById(@PathVariable("id") Long id) {
+        System.out.println("yes");
         return service.findById(id);
     }
 }

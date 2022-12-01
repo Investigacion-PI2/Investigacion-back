@@ -35,60 +35,40 @@ public class ResearchGroupManagementApplication {
 //			for ( ; users.hasNext() ; ++i ) users.next();
 //			System.out.println("users size: "+i);
 			
-//			User user1 = new User();
-//			User user2 = new User();
-//			ResearchProject project1 = new ResearchProject();
-//			RprojectUser rprojectUser1 = new RprojectUser();
+			// Only uncomment the following if using H2.
+//			ResearchProject rp = new ResearchProject();
+//			rp.setTitle("Titulo");
+//			rp.setDescription("Descripción");
 //			
-//			userDao.save(user1);
-//			user1 = userDao.findById(1L);
-////			user1.setId(1L);
-//			rprojectDao.save(project1);
-//			project1 = rprojectDao.findById(1L);
-////			project1.setId(1L);
+//			rprojectDao.save(rp);
 //			
-//			rprojectUser1.setUser(user1);
-//			rprojectUser1.setResearchProject(project1);
-//			rprojectUserDao.save(rprojectUser1);
-			
-			
-			ResearchProject rp = new ResearchProject();
-			//rp.setId(Long.valueOf(1));
-			rp.setTitle("Titulo");
-			rp.setDescription("Descripción");
-			
-			rprojectDao.save(rp);
-			
-			User u = new User();
-			//u.setId(Long.valueOf(1));
-			u.setUsername("Zonitidus");
-			u.setFirstName("Esteban");
-			u.setLastName("Yusunguaira");
-			u.setDob(new Date(System.currentTimeMillis()));		
-			u.setPassword("juju");
-			u.setEmail("email@example.com");
-			
-			userDao.save(u);
-ResearchProject rp2 = new ResearchProject();
-			rp2.setId(Long.valueOf(1));
-			
-//			ar.setResearchProject(rp2);
+//			User u = new User();
+//			u.setUsername("username1");
+//			u.setFirstName("name1");
+//			u.setLastName("lastname1");
+//			u.setDob(new Date(System.currentTimeMillis()));		
+//			u.setPassword("123");
+//			u.setEmail("email@example.com");
 //			
-			User u1 = new User();
-			u1.setId(Long.valueOf(1));
+//			userDao.save(u);
+//			ResearchProject rp2 = new ResearchProject();
+//			rp2.setId(Long.valueOf(1));
 //			
-//			ar.setUser(u1);
+////			ar.setResearchProject(rp2);
+////			
+//			User u2 = new User();
+//			u2.setId(Long.valueOf(2));
+////			
+////			ar.setUser(u1);
+////			admissionrequestservice.save(ar);
+//			RprojectUser pu = new RprojectUser();
+//			pu.setMemberRole("Estudiante");
 //			
+//			pu.setResearchProject(rp2);
+//			pu.setUser(u);
 //			
-//			admissionrequestservice.save(ar);
-//			
-			RprojectUser pu = new RprojectUser();
-			pu.setMemberRole("Estudiante");
-			
-			pu.setResearchProject(rp2);
-			pu.setUser(u1);
-			
-			rprojectUserDao.save(pu);
+//			rprojectUserDao.save(pu);
+//			System.out.println(userDao.findAll().size());
 		};
 	}
 }
