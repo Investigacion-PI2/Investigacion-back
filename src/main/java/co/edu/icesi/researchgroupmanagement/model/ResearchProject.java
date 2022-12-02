@@ -12,7 +12,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+import javax.persistence.CascadeType;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,11 +36,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResearchProject implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@SequenceGenerator(name = "RESEARCH_PROJECT_ID_GENERATOR", allocationSize = 1, sequenceName = "RESEARCH_PROJECT_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESEARCH_PROJECT_ID_GENERATOR")
+	private Long id;
+	
+	@OneToMany(mappedBy = "researchProject")
+	private Set<AdmissionRequest> admissionRequests;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "financing_source_id")
@@ -52,9 +66,14 @@ public class ResearchProject implements java.io.Serializable {
 	@JoinColumn(name = "rproject_type_id")
 	private RprojectType rprojectType;
 	
+	
+//	@NotNull
 	private String title;
+//	@NotNull
 	private String description;
+//	@PastOrPresent
 	private Date startDate;
+//	@Future
 	private Date finishDate;
 	
 	@ManyToMany(mappedBy = "researchProjects")
@@ -66,17 +85,20 @@ public class ResearchProject implements java.io.Serializable {
 	@OneToMany(mappedBy = "researchProject")
 	private Set<Resource> resources;
 	
-	@OneToMany(mappedBy = "researchProject")
+	@OneToMany(mappedBy = "researchProject", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler","researchProject"}, allowSetters = true)
 	private Set<RprojectGoal> rprojectGoals;
 	
 	@OneToMany(mappedBy = "researchProject")
-	private Set<RprojectUser> rprojectUsers;
+	private Set<RprojectUser> rRprojectUser;
 
-	public ResearchProject(long id, String title, String description, Date startDate) {
+	@JsonCreator
+	public ResearchProject(Long id, String title, String description, Date startDate, Set<RprojectGoal> rprojectGoals) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.startDate = startDate;
+		this.rprojectGoals = rprojectGoals;
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -24,11 +25,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResearchArea implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@SequenceGenerator(name = "RESEARCH_AREA_ID_GENERATOR", allocationSize = 1, sequenceName = "RESEARCH_AREA_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESEARCH_AREA_ID_GENERATOR")
+	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "great_rarea_id")
@@ -40,7 +42,7 @@ public class ResearchArea implements java.io.Serializable {
 	@OneToMany(mappedBy = "researchArea")
 	private Set<ResearchLine> researchLines;
 
-	public ResearchArea(long id, String name, String description) {
+	public ResearchArea(Long id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;

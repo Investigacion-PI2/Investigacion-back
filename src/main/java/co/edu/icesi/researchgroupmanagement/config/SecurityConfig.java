@@ -43,7 +43,7 @@ public class SecurityConfig {
 	}
     
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http) 
+    public AuthenticationManager authManager(HttpSecurity http)
       throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
             .userDetailsService(userDetailsService)
@@ -56,10 +56,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JWTFilter jwtFilter) throws Exception {
         http.csrf().disable().cors().disable()
-            .authorizeRequests((authz) -> authz
-                .antMatchers("/**/authenticate").permitAll()
-                .anyRequest().authenticated()
-            )
+        .authorizeRequests(
+                ).anyRequest().permitAll().and()
+//            .authorizeRequests((authz) -> authz
+//                  .antMatchers("/**/authenticate").permitAll()
+//                .anyRequest()
+//                .authenticated()
+//            )
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()

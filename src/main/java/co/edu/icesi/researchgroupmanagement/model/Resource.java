@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -26,11 +27,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Resource implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@SequenceGenerator(name = "RESOURCE_ID_GENERATOR", allocationSize = 1, sequenceName = "RESOURCE_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESOURCE_ID_GENERATOR")
+	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "research_project_id")
@@ -58,7 +60,7 @@ public class Resource implements java.io.Serializable {
 	@JoinColumn(name = "research_paper_id")
 	private ResearchPaper researchPaper;
 
-	public Resource(long id, String description, Date publishDate, String resourceUrl) {
+	public Resource(Long id, String description, Date publishDate, String resourceUrl) {
 		this.id = id;
 		this.description = description;
 		this.publishDate = publishDate;

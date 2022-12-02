@@ -15,12 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RgroupLeaderId implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Column(name = "rgroup_id")
-	private long rgroupId;
+	private Long rgroupId;
 	@Column(name = "leader_id")
-	private long leaderId;
+	private Long leaderId;
 
 	public boolean equals(Object other) {
 		if ((this == other))
@@ -32,14 +32,6 @@ public class RgroupLeaderId implements java.io.Serializable {
 		RgroupLeaderId castOther = (RgroupLeaderId) other;
 
 		return (this.getRgroupId() == castOther.getRgroupId()) && (this.getLeaderId() == castOther.getLeaderId());
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (int) this.getRgroupId();
-		result = 37 * result + (int) this.getLeaderId();
-		return result;
 	}
 
 }

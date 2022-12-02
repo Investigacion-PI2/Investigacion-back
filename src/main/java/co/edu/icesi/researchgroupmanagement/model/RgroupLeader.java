@@ -20,10 +20,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RgroupLeader implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private RgroupLeaderId id;
+	private RgroupLeaderId id = new RgroupLeaderId();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @MapsId("rgroupId")

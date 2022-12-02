@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.researchgroupmanagement.daos.implementation.ResearchGroupDaoImp;
 import co.edu.icesi.researchgroupmanagement.model.Faculty;
 import co.edu.icesi.researchgroupmanagement.model.ResearchGroup;
 import co.edu.icesi.researchgroupmanagement.repository.FacultyRepository;
@@ -15,13 +16,14 @@ import co.edu.icesi.researchgroupmanagement.repository.SciTiNationalProgramRepos
 
 @Service
 public class ResearchGroupService {
-    ResearchGroupRepository rgr;
+//    ResearchGroupRepository rgr;
+    ResearchGroupDaoImp rgr;
     FacultyRepository fr;
     InstitutionRepository ir;
     SciTiNationalProgramRepository scitir;
 
     @Autowired
-    public ResearchGroupService(ResearchGroupRepository rgr, FacultyRepository fr,
+    public ResearchGroupService(ResearchGroupDaoImp rgr, FacultyRepository fr,
             SciTiNationalProgramRepository scitir, InstitutionRepository ir) {
         this.rgr = rgr;
         this.fr = fr;
@@ -79,6 +81,6 @@ public class ResearchGroupService {
 
     @Transactional
     public ResearchGroup findById(Long id) {
-        return rgr.findById(id).get();
+        return rgr.findById(id);
     }
 }
