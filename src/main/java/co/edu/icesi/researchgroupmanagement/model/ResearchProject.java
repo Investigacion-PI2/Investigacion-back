@@ -47,23 +47,23 @@ public class ResearchProject implements java.io.Serializable {
 	private Set<AdmissionRequest> admissionRequests;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "financing_source_id")
+	@JoinColumn(name = "fsource_id")
 	private FinancingSource financingSource;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "financing_type_id")
+	@JoinColumn(name = "ftype_id")
 	private FinancingType financingType;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "research_line_id")
+	@JoinColumn(name = "rline_id")
 	private ResearchLine researchLine;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rproject_status_id")
+	@JoinColumn(name = "status_id")
 	private RprojectStatus rprojectStatus;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rproject_type_id")
+	@JoinColumn(name = "rtype_id")
 	private RprojectType rprojectType;
 	
 	

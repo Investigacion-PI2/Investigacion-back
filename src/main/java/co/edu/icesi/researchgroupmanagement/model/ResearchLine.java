@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,11 +35,13 @@ public class ResearchLine implements java.io.Serializable {
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "research_area_id")
+	@JoinColumn(name = "rarea_id")
+    @JsonIgnore
 	private ResearchArea researchArea;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "research_group_id")
+	@JoinColumn(name = "rgroup_id")
+    @JsonIgnore
 	private ResearchGroup researchGroup;
 	
 	private String name;
