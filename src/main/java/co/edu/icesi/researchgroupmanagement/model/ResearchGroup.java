@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,22 +38,27 @@ public class ResearchGroup implements java.io.Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "faculty_id")
+    @JsonIgnore
 	private Faculty faculty;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "institution_id")
+    @JsonIgnore
 	private Institution institution;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "minciencias_category_id")
+	@JoinColumn(name = "mciencias_category_id")
+    @JsonIgnore
 	private MincienciasCategory mincienciasCategory;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sci_ti_nprogram_id")
+	@JoinColumn(name = "nprogram_id")
+    @JsonIgnore
 	private SciTiNationalProgram sciTiNationalProgram;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "users_id")
+	@JoinColumn(name = "leader_id")
+    @JsonIgnore
 	private User user;
 	
 	private String name;
@@ -72,6 +79,7 @@ public class ResearchGroup implements java.io.Serializable {
 			  name = "rgroup_rproject", 
 			  joinColumns = @JoinColumn(name = "research_group_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "research_project_id"))
+//    @JsonIgnore
 	private Set<ResearchProject> researchProjects;
 
 	public ResearchGroup(Long id, Faculty faculty, Institution institution, MincienciasCategory mincienciasCategory,

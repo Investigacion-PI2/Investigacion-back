@@ -34,6 +34,7 @@ public class AdmissionRequest implements java.io.Serializable {
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "status_id")
 	@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler", "admissionRequests"}, allowSetters = true)
 	private AdmissionStatus admissionStatus;
 	
