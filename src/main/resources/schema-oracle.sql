@@ -496,6 +496,36 @@ CREATE TABLE users_sprogram (
 ALTER TABLE users_sprogram ADD CONSTRAINT users_sprogram_pk PRIMARY KEY ( user_id,
                                                                           student_program_id );
 
+CREATE TABLE project_rproject_status (
+	id NUMBER(10) NOT NULL,
+    research_project_id NUMBER(10) NOT NULL, 
+    rproject_status_id NUMBER(10) NOT NULL,
+    change_date DATE NOT NULL
+);
+
+
+
+ALTER TABLE project_rproject_status ADD CONSTRAINT project_rp_s_pk PRIMARY KEY (id);
+
+ALTER TABLE project_rproject_status
+    ADD CONSTRAINT project_r_s_p_fk FOREIGN KEY ( research_project_id )
+        REFERENCES research_project ( id );
+
+ALTER TABLE project_rproject_status
+    ADD CONSTRAINT project_r_s_s_fk FOREIGN KEY ( rproject_status_id )
+        REFERENCES rproject_status ( id );
+
+CREATE SEQUENCE project_rp_s_id_seq START WITH 1 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER project_rp_s_id_trg BEFORE
+    INSERT ON project_rproject_status
+    FOR EACH ROW
+    WHEN ( new.id IS NULL )
+BEGIN
+    :new.id := project_rp_s_id_seq.nextval;
+END;
+
+
 ALTER TABLE admission_request
     ADD CONSTRAINT admission_request_users_fk FOREIGN KEY ( user_id )
         REFERENCES users ( id )
@@ -853,6 +883,38 @@ BEGIN
     :new.id := user_types_id_seq.nextval;
 END;
 /
+
+CREATE SEQUENCE users_id_seq START WITH 1 NOCACHE ORDER;
+
+CREATE OR REPLACE TRIGGER users_id_seq BEFORE
+    INSERT ON users
+    FOR EACH ROW
+    WHEN ( new.id IS NULL )
+BEGIN
+    :new.id := users_id_seq.nextval;
+END;
+
+CREATE SEQUENCE rproject_status_id_seq START WITH 1 NOCACHE ORDER;
+
+create or replace TRIGGER rproject_status_id_trg BEFORE
+    INSERT ON rproject_status
+    FOR EACH ROW
+    WHEN ( new.id IS NULL )
+BEGIN
+    :new.id := rproject_status_id_seq.nextval;
+END;
+
+CREATE SEQUENCE rproject_types_id_seq START WITH 1 NOCACHE ORDER;
+
+create or replace TRIGGER rproject_types_id_trg BEFORE
+    INSERT ON rproject_types
+    FOR EACH ROW
+    WHEN ( new.id IS NULL )
+BEGIN
+    :new.id := rproject_types_id_seq.nextval;
+END;
+
+
 
 
 
