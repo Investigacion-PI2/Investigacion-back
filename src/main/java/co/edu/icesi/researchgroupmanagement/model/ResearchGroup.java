@@ -1,5 +1,4 @@
 package co.edu.icesi.researchgroupmanagement.model;
-// Generated Oct 22, 2022, 7:53:51 PM by Hibernate Tools 5.6.7.Final
 
 import java.util.Set;
 
@@ -13,7 +12,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,37 +29,41 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResearchGroup implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long id;
+	@SequenceGenerator(name = "RESEARCH_GROUP_ID_GENERATOR", allocationSize = 1, sequenceName = "RESEARCH_GROUP_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESEARCH_GROUP_ID_GENERATOR")
+	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "faculty_id")
+    @JsonIgnore
 	private Faculty faculty;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "institution_id")
+    @JsonIgnore
 	private Institution institution;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "minciencias_category_id")
+	@JoinColumn(name = "mciencias_category_id")
+    @JsonIgnore
 	private MincienciasCategory mincienciasCategory;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sci_ti_nprogram_id")
+	@JoinColumn(name = "nprogram_id")
+    @JsonIgnore
 	private SciTiNationalProgram sciTiNationalProgram;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "users_id")
+	@JoinColumn(name = "leader_id")
+    @JsonIgnore
 	private User user;
 	
 	private String name;
 	private String description;
-	
-	@OneToMany(mappedBy = "researchGroup")
-	private Set<AdmissionRequest> admissionRequests;
+	private String mciencias_id;
 	
 	@OneToMany(mappedBy = "researchGroup")
 	private Set<RgroupUser> rgroupUser;
@@ -73,9 +79,10 @@ public class ResearchGroup implements java.io.Serializable {
 			  name = "rgroup_rproject", 
 			  joinColumns = @JoinColumn(name = "research_group_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "research_project_id"))
+//    @JsonIgnore
 	private Set<ResearchProject> researchProjects;
 
-	public ResearchGroup(long id, Faculty faculty, Institution institution, MincienciasCategory mincienciasCategory,
+	public ResearchGroup(Long id, Faculty faculty, Institution institution, MincienciasCategory mincienciasCategory,
 			User user, String name, String description) {
 		this.id = id;
 		this.faculty = faculty;

@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +22,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RgroupLeader implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final Long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private RgroupLeaderId id;
+	private RgroupLeaderId id = new RgroupLeaderId();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @MapsId("rgroupId")
 	@JoinColumn(name = "rgroup_id")
+    @JsonIgnore
 	private ResearchGroup researchGroup;
 	
 	private String leaderCitizenId;

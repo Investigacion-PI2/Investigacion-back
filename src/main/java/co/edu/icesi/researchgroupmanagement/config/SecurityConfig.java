@@ -9,13 +9,16 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import co.edu.icesi.researchgroupmanagement.config.util.CustomAccessDeniedHandler;
+import co.edu.icesi.researchgroupmanagement.config.util.CustomAuthenticationEntryPoint;
 import co.edu.icesi.researchgroupmanagement.config.util.CustomAuthenticationProvider;
-import co.edu.icesi.researchgroupmanagement.config.util.CustomPasswordEncoder;
-import co.edu.icesi.researchgroupmanagement.service.CustomUserDetailsService;
+import co.edu.icesi.researchgroupmanagement.config.util.JWTFilter;
+import co.edu.icesi.researchgroupmanagement.service.UserDetailsServiceImp;
 
 @Configuration
 @EnableWebSecurity
@@ -23,39 +26,47 @@ import co.edu.icesi.researchgroupmanagement.service.CustomUserDetailsService;
 public class SecurityConfig {
 
     @Autowired
-    private CustomAccessDeniedHandler accessDeniedHandler;
-
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
-
-    @Autowired
     private CustomAuthenticationProvider authProvider;
 
     @Autowired
-    CustomPasswordEncoder passwordEncoder;
+    private UserDetailsServiceImp userDetailsService;
+
+    @Autowired
+    private CustomAccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private CustomAuthenticationEntryPoint authenticationEntryPoint;
+
+    @Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
     
     @Bean
-    public AuthenticationManager authManager(HttpSecurity http) 
+    public AuthenticationManager authManager(HttpSecurity http)
       throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
             .userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder.getPasswordEncoder())
+            .passwordEncoder(passwordEncoder())
             .and()
             .authenticationProvider(authProvider)
             .build();
     }
     
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JwtFilter jwtFilter) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JWTFilter jwtFilter) throws Exception {
         http.csrf().disable().cors().disable()
-            .authorizeRequests((authz) -> authz
-                .antMatchers("/**/authenticate").permitAll()
-                .anyRequest().authenticated()
-            )
+        .authorizeRequests(
+                ).anyRequest().permitAll().and()
+//            .authorizeRequests((authz) -> authz
+//                  .antMatchers("/**/authenticate").permitAll()
+//                .anyRequest()
+//                .authenticated()
+//            )
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+            .exceptionHandling().accessDeniedHandler(accessDeniedHandler).authenticationEntryPoint(authenticationEntryPoint)
             .and()
             .httpBasic()
             .and()

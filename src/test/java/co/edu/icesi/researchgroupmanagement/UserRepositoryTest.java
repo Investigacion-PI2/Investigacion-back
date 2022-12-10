@@ -4,14 +4,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Date;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
 import co.edu.icesi.researchgroupmanagement.model.User;
@@ -25,6 +29,11 @@ import co.edu.icesi.researchgroupmanagement.repository.UserRepository;
 //})
 //@ContextConfiguration(classes = ResearchGroupManagementApplication.class)
 //@ActiveProfiles("test")
+@TestPropertySource("/application.properties")
+//@RunWith(SpringRunner.class)
+@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
+//@ContextConfiguration(classes= ObjectAddressDaoImpl.class, loader=AnnotationConfigContextLoader.class)
+@EnableAutoConfiguration(exclude=AutoConfigureTestDatabase.class)
 public class UserRepositoryTest {
 
 //  @Autowired
@@ -49,9 +58,10 @@ public class UserRepositoryTest {
   @Test
 //  @Sql("data.sql")
   void whenSaved_thenFindsByName() {
-	  
+
+	String user1Username = "testUsername1";
     userRepository.save(new User(
-    		"testUsername1",
+    		user1Username,
     		"testFirstname1",
     		"testLastname1",
     		new Date(12345),
@@ -61,10 +71,13 @@ public class UserRepositoryTest {
     User extractedUser = userRepository.findById(1L).get();
     assertThat(extractedUser).isNotNull();
     assertEquals(1, extractedUser.getId());
-    assertEquals("testUsername1", extractedUser.getUsername());
+    assertEquals(user1Username, extractedUser.getUsername());
+    userRepository.delete(extractedUser);
+    assertThat(Optional.of(userRepository.findByUsername(user1Username)).isEmpty());
 
+    String user2Username = "testUsername2";
     userRepository.save(new User(
-    		"testUsername2",
+    		user2Username,
     		"testFirstname2",
     		"testLastname2",
     		new Date(12345),
@@ -74,6 +87,8 @@ public class UserRepositoryTest {
     User extractedUser2 = userRepository.findById(2L).get();
     assertThat(extractedUser2).isNotNull();
     assertEquals(2, extractedUser2.getId());
-    assertEquals("testUsername2", extractedUser2.getUsername());
+    assertEquals(user2Username, extractedUser2.getUsername());
+    userRepository.delete(extractedUser);
+    assertThat(Optional.of(userRepository.findByUsername(user2Username)).isEmpty());
   }
 }
