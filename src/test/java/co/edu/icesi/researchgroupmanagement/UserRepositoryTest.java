@@ -22,14 +22,14 @@ import co.edu.icesi.researchgroupmanagement.model.User;
 import co.edu.icesi.researchgroupmanagement.repository.UserRepository;
 
 //@ExtendWith(SpringExtension.class)
-@DataJpaTest
+//@DataJpaTest
 //@TestPropertySource(properties = {
 //        "spring.jpa.hibernate.ddl-auto=validate",
 //        "spring.datasource.initialization-mode=always"
 //})
 //@ContextConfiguration(classes = ResearchGroupManagementApplication.class)
 //@ActiveProfiles("test")
-@TestPropertySource("/application.properties")
+//@TestPropertySource("/application.properties")
 //@RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
 //@ContextConfiguration(classes= ObjectAddressDaoImpl.class, loader=AnnotationConfigContextLoader.class)
@@ -47,7 +47,7 @@ public class UserRepositoryTest {
   @Autowired
   private UserRepository userRepository;
 
-  @Test
+  //@Test
   void injectedComponentsAreNotNull(){
 //    assertThat(dataSource).isNotNull();
 //    assertThat(jdbcTemplate).isNotNull();
@@ -55,7 +55,7 @@ public class UserRepositoryTest {
     assertThat(userRepository).isNotNull();
   }
   
-  @Test
+  //@Test
 //  @Sql("data.sql")
   void whenSaved_thenFindsByName() {
 
