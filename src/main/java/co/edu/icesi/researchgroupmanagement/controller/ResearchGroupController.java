@@ -23,6 +23,11 @@ public class ResearchGroupController {
         service.save(rg);
     }
 
+    @GetMapping("/hola")
+    public String hola(){
+        return "hola!";
+    }
+
     @GetMapping
     public Iterable<ResearchGroup> findAll() {
         return service.findAll();
